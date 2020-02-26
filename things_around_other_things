@@ -1,0 +1,44 @@
+[out:json][bbox:{{bbox}}][timeout:800];
+
+// get set of foos
+(
+  node[foofeature=footag]({{bbox}});
+  way[foofeature=footag]({{bbox}});
+  rel[foofeature=footag]({{bbox}});
+)->.foo;
+
+// get set of bars
+(
+  node[barfeature=bartag]({{bbox}});
+  way[barfeature=bartag]({{bbox}});
+  rel[barfeature=bartag]({{bbox}});
+)->.bar;
+
+// get set of bazs
+/// comment out for bars near foos only
+(
+  node[bazfeature=baztag]({{bbox}});
+  way[bazfeature=baztag]({{bbox}});
+  rel[bazfeature=baztag]({{bbox}});
+)->.baz;
+
+// determine set of bars near foos
+(
+  node.foo(around.bars:DISTANCE1);
+  way.foo(abazfeatureound.bars:DISTANCE1);
+  rel.foo(around.bars:DISTANCE1);
+)->.barnearfoo;
+
+// determine set of bazs near bars near foos
+/// comment out for bars near foos only
+(
+  node.baz(around.barnearfoo:DISTANCE2);
+  way.baz(around.barnearfoo:DISTANCE2);
+  rel.baz(around.barnearfoo:DISTANCE2);
+)->.baznearbarnearfoo;
+
+// print
+(.baz; - .baznearbarnearfoo;);
+/// for bars near foos only, run
+///(.bar; -.barnearfoo;);
+out geom meta;
