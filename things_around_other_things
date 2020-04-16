@@ -15,30 +15,30 @@
 )->.bar;
 
 // get set of bazs
-/// comment out for bars near foos only
+/// comment out for foos near bars only
 (
   node[bazfeature=baztag]({{bbox}});
   way[bazfeature=baztag]({{bbox}});
   rel[bazfeature=baztag]({{bbox}});
 )->.baz;
 
-// determine set of bars near foos
+// determine set of foos near bars
 (
   node.foo(around.bars:DISTANCE1);
-  way.foo(abazfeatureound.bars:DISTANCE1);
+  way.foo(around.bars:DISTANCE1);
   rel.foo(around.bars:DISTANCE1);
-)->.barnearfoo;
+)->.foonearbar;
 
-// determine set of bazs near bars near foos
-/// comment out for bars near foos only
+// determine set of bazs near foos near bars
+/// comment out for foos near bars only
 (
-  node.baz(around.barnearfoo:DISTANCE2);
-  way.baz(around.barnearfoo:DISTANCE2);
-  rel.baz(around.barnearfoo:DISTANCE2);
-)->.baznearbarnearfoo;
+  node.baz(around.foonearbar:DISTANCE2);
+  way.baz(around.foonearbar:DISTANCE2);
+  rel.baz(around.foonearbar:DISTANCE2);
+)->.baznearfoonearbar;
 
 // print
-(.baz; - .baznearbarnearfoo;);
-/// for bars near foos only, run
-///(.bar; -.barnearfoo;);
+(.baz; - .baznearfoonearbar;);
+/// for foos near bars only, run
+///(.foo; -.foonearbar;);
 out geom meta;
